@@ -3,7 +3,7 @@ web:
   command: go run app.go
   ports:
     - "3000:3000"
-  volumes: # look into volumes v. "ADD"
+  volumes:
     - .:/go/src/github.com/kpurdon/go-todo
   links:
     - db
