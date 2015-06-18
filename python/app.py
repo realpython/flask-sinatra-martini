@@ -1,7 +1,8 @@
 import os
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from pymongo import MongoClient
+from bson.json_util import dumps
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ def blog_json():
     _posts = db.blog.find()
     posts = [post for post in _posts]
 
-    return jsonify(posts)
+    return dumps(posts)
 
 
 @app.route('/new', methods=['POST'])
@@ -42,4 +43,4 @@ def new():
     return 'Insert Complete'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
