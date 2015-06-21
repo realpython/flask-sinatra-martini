@@ -1,0 +1,12 @@
+web:
+  build: .
+  command: bundle exec ruby app.rb
+  ports:
+    - "4567:4567"
+  volumes:
+    - .:/app
+  links:
+    - db
+db:
+  image: mongo:3.0.4
+  command: mongod --quiet --logpath=/dev/null

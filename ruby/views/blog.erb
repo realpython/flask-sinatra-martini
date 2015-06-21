@@ -1,0 +1,14 @@
+<!doctype HTML>
+<html>
+  <head>
+    <title>Ruby Sinatra Example</title>
+  </head>
+  <body>
+    <% @posts.each do |post| %>
+      <h1><%= post['title'] %></h1>
+      <h3><%= post['summary'] %></h3>
+      <p><%= post['content'] %></p>
+      <hr>
+    <% end %>
+  </body>
+</html>

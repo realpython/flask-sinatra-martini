@@ -1,0 +1,12 @@
+web:
+  build: .
+  command: go run app.go
+  ports:
+    - "3000:3000"
+  volumes:
+    - .:/go/src/github.com/kpurdon/go-todo
+  links:
+    - db
+db:
+  image: mongo:3.0.4
+  command: mongod --quiet --logpath=/dev/null

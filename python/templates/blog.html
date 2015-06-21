@@ -1,0 +1,14 @@
+<!doctype HTML>
+<html>
+  <head>
+    <title>Python Flask Example</title>
+  </head>
+  <body>
+    {% for post in posts %}
+      <h1> {{ post.title }} </h1>
+      <h3> {{ post.summary }} </h3>
+      <p> {{ post.content }} </p>
+      <hr>
+    {% endfor %}
+  </body>
+</html>

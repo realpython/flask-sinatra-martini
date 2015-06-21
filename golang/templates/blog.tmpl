@@ -1,0 +1,14 @@
+<!doctype HTML>
+<html>
+  <head>
+    <title>Golang Martini Example</title>
+  </head>
+  <body>
+    {{range . }}
+      <h1>{{.Title}}</h1>
+      <h3>{{.Summary}}</h3>
+      <p>{{.Content}}</p>
+      <hr>
+    {{ end }}
+  </body>
+</html>
