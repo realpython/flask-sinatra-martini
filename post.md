@@ -5,9 +5,68 @@ author: Kyle W. Purdon
 categories: [python, ruby, golang, development]
 ---
 
-After a recent comparison of python, ruby, and golang for a command-line application I decided to use the same pattern to compare building a simple web service. I have selected flask (python), sinatra (ruby), and martini (golang) for this comparision. Yes, there are many other options for web application libraries in each language but I felt these three lended well to comparision. Here is a high-level comparison of the libraries by [stackshare](http://stackshare.io/stackups/martini-vs-flask-vs-sinatra).
+After a recent comparison of python, ruby, and golang for a command-line application I decided to use the same pattern to compare building a simple web service. I have selected flask (python), sinatra (ruby), and martini (golang) for this comparison. Yes, there are many other options for web application libraries in each language but I felt these three lend well to comparison.
 
 ADD IMAGE
+
+## Library Overviews
+
+Here is a high-level comparison of the libraries by [stackshare](http://stackshare.io/stackups/martini-vs-flask-vs-sinatra).
+
+### [Flask (Python)](http://flask.pocoo.org/)
+
+> Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.
+
+For very simple applications such as the one shown in this demo flask is a great choice. The basic flask application is only 7 LOC in a single python source file. The draw of flask over other python web libraries (such as [Django](https://www.djangoproject.com/) or [Pyramid](http://www.pylonsproject.org/)) is that you can start small and build to a more complex application as needed.
+
+*Hello World*
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
+```
+
+### [Sinatra (Ruby)](http://www.sinatrarb.com/)
+
+> Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort.
+
+Just like flask, sinatra is great for simple applications. The basic sinatra application is only 4 LOC in a single ruby source file. Sinatra is used instead of libraries such as [ruby on rails](http://rubyonrails.org/) for the same reason as flask, you can start very small and build to a more complex application as needed.
+
+*Hello World*
+```ruby
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+```
+
+### [Martini (Golang)](http://martini.codegangsta.io/)
+
+> Martini is a powerful package for quickly writing modular web applications/services in Golang.
+
+Martini comes with a few more batteries included than sinatra or flask but is still very lightweight to start with at only 9 LOC for the basic application. Martini has come under some [criticism](https://stephensearles.com/three-reasons-you-should-not-use-martini/) by the golang community but still has one of the highest rated github projects of any Golang web framework. Some others include [Revel](https://revel.github.io/), [Gin](https://gin-gonic.github.io/gin/), and even the built-in [net/http](http://golang.org/pkg/net/http/). The author of Martini responded directly to the criticism [here](http://codegangsta.io/blog/2014/05/19/my-thoughts-on-martini/).
+
+*Hello World*
+```go
+package main
+
+import "github.com/go-martini/martini"
+
+func main() {
+  m := martini.Classic()
+  m.Get("/", func() string {
+    return "Hello world!"
+  })
+  m.Run()
+}
+```
 
 ## Service Description
 
