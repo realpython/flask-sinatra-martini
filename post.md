@@ -5,7 +5,7 @@ author: Kyle W. Purdon
 categories: [python, ruby, golang, development]
 ---
 
-INTRO HERE
+After a recent comparison of python, ruby, and golang for a command-line application I decided to use the same pattern to compare building a simple web service. I have selected flask (python), sinatra (ruby), and martini (golang) for this comparision. Yes, there are many other options for web application libraries in each language but I felt these three lended well to comparision. Here is a high-level comparison of the libraries by [stackshare](http://stackshare.io/stackups/martini-vs-flask-vs-sinatra).
 
 ADD IMAGE
 
@@ -89,6 +89,57 @@ Each application can be broken down into the following components:
 * [flask](http://flask.pocoo.org/) (Python)
 * [sinatra](http://www.sinatrarb.com/) (Ruby)
 * [martini](http://martini.codegangsta.io/) (Golang)
+
+
+## Project Setup
+
+All of the projects are bootstrapped using [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/). Before diving into how each application is bootstrapped under the hood we can just use docker to get each up and running in exactly the same way:
+
+1. `docker-compose up`
+
+Seriously, that's it! Now for each application there is a `Dockerfile` and a `docker-compose.yml` that specify what happens when you run the above command.
+
+### Python (flask) - *Dockerfile*
+
+```
+FROM python:2.7
+
+ADD . /app
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+```
+
+This `Dockerfile` says that we are starting from a base image with python 2.7 installed, adding our application to the `/app` directory and using [pip](https://pypi.python.org/pypi/pip) to install our application requirements specified in `requirements.txt`.
+
+### Ruby (sinatra)
+
+```
+FROM ruby:2.2
+
+ADD . /app
+WORKDIR /app
+
+RUN bundle install
+```
+
+This `Dockerfile` says that we are starting from a base image with ruby 2.2 installed, adding our application to the `/app` directory and using [bundler](http://bundler.io/) to install our application requirements specified in the `Gemfile`.
+
+### Golang (martini)
+
+```
+FROM golang:1.3
+
+ADD . /go/src/github.com/kpurdon/go-blog
+WORKDIR /go/src/github.com/kpurdon/go-blog
+
+RUN go get github.com/go-martini/martini && \
+    go get github.com/martini-contrib/render && \
+    go get gopkg.in/mgo.v2 && \
+    go get github.com/martini-contrib/binding
+```
+
+This `Dockerfile` says that we are starting from a base image with Golang 1.3 installed, adding our application to the `/go/src/github.com/kpurdon/go-blog` directory and getting all of our neccesary dependencies using the `go get` command.
 
 ## Initialize/Run An Application
 
