@@ -198,7 +198,7 @@ RUN go get github.com/go-martini/martini && \
     go get github.com/martini-contrib/binding
 ```
 
-This `Dockerfile` says that we are starting from a base image with Golang 1.3 installed, adding our application to the `/go/src/github.com/kpurdon/go-blog` directory and getting all of our neccesary dependencies using the `go get` command.
+This `Dockerfile` says that we are starting from a base image with Golang 1.3 installed, adding our application to the `/go/src/github.com/kpurdon/go-blog` directory and getting all of our necessary dependencies using the `go get` command.
 
 ## Initialize/Run An Application
 
@@ -580,12 +580,12 @@ Here are a few notable differences:
 
 ### Simplicity
 
-While flask is very lightweight and reads clearly the sinatra app is the simplest of the two. At 23 LOC (compared to 46 for flask and 42 for martini). Also the handling of input forms is handled behind the scenes in sinatra. For these reasons sinatra is the winner in this catagory.
+While flask is very lightweight and reads clearly the sinatra app is the simplest of the two. At 23 LOC (compared to 46 for flask and 42 for martini). Also the handling of input forms is handled behind the scenes in sinatra. For these reasons sinatra is the winner in this category.
 
 ### Documentation
 
-The flask documentation was the simplest to search and most approachable. While the sinatra and martini documentation is complete it was not as approachable. For this reason flask is the winner in this catagory.
+The flask documentation was the simplest to search and most approachable. While the sinatra and martini documentation is complete it was not as approachable. For this reason flask is the winner in this category.
 
 ## Final Determination
 
-The correct tool for this example is a tie between Python and Ruby. Pick whichever you are more comfortable with and you will be succesfull. If you need high performance consider Golang.
+The correct tool for this example is a tie between Python and Ruby. Pick whichever you are more comfortable with and you will be successful. If you need high performance consider Golang.
