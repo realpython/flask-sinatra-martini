@@ -5,7 +5,7 @@ author: Kyle W. Purdon
 categories: [python, ruby, golang, development]
 ---
 
-After a recent comparison of python, ruby, and golang for a command-line application I decided to use the same pattern to compare building a simple web service. I have selected flask (python), sinatra (ruby), and martini (golang) for this comparison. Yes, there are many other options for web application libraries in each language but I felt these three lend well to comparison.
+After a [recent comparison](https://realpython.com/blog/python/python-ruby-and-golang-a-command-line-application-comparison/) of python, ruby, and golang for a command-line application I decided to use the same pattern to compare building a simple web service. I have selected flask (python), sinatra (ruby), and martini (golang) for this comparison. Yes, there are many other options for web application libraries in each language but I felt these three lend well to comparison.
 
 ADD IMAGE
 
