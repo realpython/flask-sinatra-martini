@@ -587,4 +587,4 @@ The correct tool for this example is a tie between Flask (Python) and Sinatra (R
 
 <hr>
 
-Have anything to add to this? Please comment below. Thank you!
+Questions? Feedback? Please comment below. Thank you!
