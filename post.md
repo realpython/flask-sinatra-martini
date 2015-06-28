@@ -5,9 +5,68 @@ author: Kyle W. Purdon
 categories: [python, ruby, golang, development]
 ---
 
-INTRO HERE
+After a [recent comparison](https://realpython.com/blog/python/python-ruby-and-golang-a-command-line-application-comparison/) of python, ruby, and golang for a command-line application I decided to use the same pattern to compare building a simple web service. I have selected flask (python), sinatra (ruby), and martini (golang) for this comparison. Yes, there are many other options for web application libraries in each language but I felt these three lend well to comparison.
 
 ADD IMAGE
+
+## Library Overviews
+
+Here is a high-level comparison of the libraries by [stackshare](http://stackshare.io/stackups/martini-vs-flask-vs-sinatra).
+
+### [Flask (Python)](http://flask.pocoo.org/)
+
+> Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.
+
+For very simple applications such as the one shown in this demo flask is a great choice. The basic flask application is only 7 LOC in a single python source file. The draw of flask over other python web libraries (such as [Django](https://www.djangoproject.com/) or [Pyramid](http://www.pylonsproject.org/)) is that you can start small and build to a more complex application as needed.
+
+*Hello World*
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
+```
+
+### [Sinatra (Ruby)](http://www.sinatrarb.com/)
+
+> Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort.
+
+Just like flask, sinatra is great for simple applications. The basic sinatra application is only 4 LOC in a single ruby source file. Sinatra is used instead of libraries such as [ruby on rails](http://rubyonrails.org/) for the same reason as flask, you can start very small and build to a more complex application as needed.
+
+*Hello World*
+```ruby
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+```
+
+### [Martini (Golang)](http://martini.codegangsta.io/)
+
+> Martini is a powerful package for quickly writing modular web applications/services in Golang.
+
+Martini comes with a few more batteries included than sinatra or flask but is still very lightweight to start with at only 9 LOC for the basic application. Martini has come under some [criticism](https://stephensearles.com/three-reasons-you-should-not-use-martini/) by the golang community but still has one of the highest rated github projects of any Golang web framework. Some others include [Revel](https://revel.github.io/), [Gin](https://gin-gonic.github.io/gin/), and even the built-in [net/http](http://golang.org/pkg/net/http/). The author of Martini responded directly to the criticism [here](http://codegangsta.io/blog/2014/05/19/my-thoughts-on-martini/).
+
+*Hello World*
+```go
+package main
+
+import "github.com/go-martini/martini"
+
+func main() {
+  m := martini.Classic()
+  m.Get("/", func() string {
+    return "Hello world!"
+  })
+  m.Run()
+}
+```
 
 ## Service Description
 
@@ -89,6 +148,57 @@ Each application can be broken down into the following components:
 * [flask](http://flask.pocoo.org/) (Python)
 * [sinatra](http://www.sinatrarb.com/) (Ruby)
 * [martini](http://martini.codegangsta.io/) (Golang)
+
+
+## Project Setup
+
+All of the projects are bootstrapped using [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/). Before diving into how each application is bootstrapped under the hood we can just use docker to get each up and running in exactly the same way:
+
+1. `docker-compose up`
+
+Seriously, that's it! Now for each application there is a `Dockerfile` and a `docker-compose.yml` that specify what happens when you run the above command.
+
+### Python (flask) - *Dockerfile*
+
+```
+FROM python:2.7
+
+ADD . /app
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+```
+
+This `Dockerfile` says that we are starting from a base image with python 2.7 installed, adding our application to the `/app` directory and using [pip](https://pypi.python.org/pypi/pip) to install our application requirements specified in `requirements.txt`.
+
+### Ruby (sinatra)
+
+```
+FROM ruby:2.2
+
+ADD . /app
+WORKDIR /app
+
+RUN bundle install
+```
+
+This `Dockerfile` says that we are starting from a base image with ruby 2.2 installed, adding our application to the `/app` directory and using [bundler](http://bundler.io/) to install our application requirements specified in the `Gemfile`.
+
+### Golang (martini)
+
+```
+FROM golang:1.3
+
+ADD . /go/src/github.com/kpurdon/go-blog
+WORKDIR /go/src/github.com/kpurdon/go-blog
+
+RUN go get github.com/go-martini/martini && \
+    go get github.com/martini-contrib/render && \
+    go get gopkg.in/mgo.v2 && \
+    go get github.com/martini-contrib/binding
+```
+
+This `Dockerfile` says that we are starting from a base image with Golang 1.3 installed, adding our application to the `/go/src/github.com/kpurdon/go-blog` directory and getting all of our necessary dependencies using the `go get` command.
 
 ## Initialize/Run An Application
 
@@ -470,12 +580,12 @@ Here are a few notable differences:
 
 ### Simplicity
 
-While flask is very lightweight and reads clearly the sinatra app is the simplest of the two. At 23 LOC (compared to 46 for flask and 42 for martini). Also the handling of input forms is handled behind the scenes in sinatra. For these reasons sinatra is the winner in this catagory.
+While flask is very lightweight and reads clearly the sinatra app is the simplest of the two. At 23 LOC (compared to 46 for flask and 42 for martini). Also the handling of input forms is handled behind the scenes in sinatra. For these reasons sinatra is the winner in this category.
 
 ### Documentation
 
-The flask documentation was the simplest to search and most approachable. While the sinatra and martini documentation is complete it was not as approachable. For this reason flask is the winner in this catagory.
+The flask documentation was the simplest to search and most approachable. While the sinatra and martini documentation is complete it was not as approachable. For this reason flask is the winner in this category.
 
 ## Final Determination
 
-The correct tool for this example is a tie between Python and Ruby. Pick whichever you are more comfortable with and you will be succesfull. If you need high performance consider Golang.
+The correct tool for this example is a tie between Python and Ruby. Pick whichever you are more comfortable with and you will be successful. If you need high performance consider Golang.
