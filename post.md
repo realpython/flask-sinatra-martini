@@ -569,21 +569,38 @@ db:
 
 ## Conclusion
 
-Golang feels like a heavy choice for this type of application unless high performance is a key requirement. Ruby and Python are likely going to be the better choice of language. Python and Ruby (Flask and Sinatra, respectvely) are very similar as far as this application goes.
-
-Here are a few notable differences...
+To conclude lets take a look at what I believe are a few categories where the presented libraries separate themselves from each other.
 
 ### Simplicity
 
-While Flask is very lightweight and reads clearly, the Sinatra app is the simplest of the two. At 23 LOC (compared to 46 for Flask and 42 for Martini). Also the handling of input forms is handled behind the scenes in Sinatra. For these reasons Sinatra is the winner in this category.
+While Flask is very lightweight and reads clearly, the Sinatra app is the simplest of the two at 23 LOC (compared to 46 for Flask and 42 for Martini). For these reasons Sinatra is the winner in this category. It should be noted however that Sinatras simplicity is due to more default "magic". For new users this can often lead to confusion. Here is a specific example of "magic" in Sinatra.
+
+```python
+from flask import request
+params = {
+    'title': request.form['title'],
+    'summary': request.form['summary'],
+    'content': request.form['content']
+}
+```
+
+```ruby
+params # the "request.form" logic in python is done "magically" behind the scenes in Sinatra.
+```
+
+For beginners to programming Flask and Sinatra are certainly simpler, but for an experienced programmer with time spent in other statically typed languages Martini does provide a fairly simplistic interface.
 
 ### Documentation
 
-The Flask documentation was the simplest to search and most approachable. While Sinatra and Martini are both well-dcomentation, the documentation itself was not as approachable. For this reason Flask is the winner in this category.
+The Flask documentation was the simplest to search and most approachable. While Sinatra and Martini are both well documented, the documentation itself was not as approachable. For this reason Flask is the winner in this category.
+
+### Community
+
+Flask is the winner hands down in this category. The ruby community is more often than not dogmatic about Rails being the only good choice if you need anything more than a basic service (even though [Padrino](http://www.padrinorb.com/) offers this on top of Sinatra). The Golang community is still nowhere near a consensus on one (or even a few) web frameworks, which is to be expected as the language itself is so young. Python however has embraced a number of approaches to web development including Django for out-of-the-box full-featured web applications and Flask, Bottle, CheryPy, or Tornado for a micro-framework approach.
 
 ## Final Determination
 
-The correct tool for this example is a tie between Flask (Python) and Sinatra (Ruby). Pick whichever you are more comfortable with and you will be successful. On the other hand, if you need high performance, consider Martini (Golang).
+Note that the point of this article was not to promote a single tool, rather to provide an unbiased comparison of Flask, Sinatra, and Martini. With that said I would select Flask (Python) or Sinatra (Ruby). If you are coming from a language like C, or Java perhaps the statically typed nature of Golang may appeal to you. If you are a beginner Flask might be the best choice as it is very easy to get up and running and there is very little magic by default. My recommendation is that you be flexible in your decisions when selecting a library for your project.
 
 <hr>
 
