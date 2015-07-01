@@ -254,7 +254,7 @@ $ go run app.go
 
 ```python
 # get
-@app.route('/')
+@app.route('/')  # the default is GET only
 def blog():
     ...
 
