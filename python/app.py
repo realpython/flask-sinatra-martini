@@ -15,7 +15,7 @@ db = client.blog
 @app.route('/')
 def blog():
 
-    posts = [db.blog.find()]
+    posts = db.blog.find()
 
     return render_template('blog.html', posts=posts)
 
@@ -23,7 +23,7 @@ def blog():
 @app.route('/json')
 def blog_json():
 
-    posts = [db.blog.find()]
+    posts = db.blog.find()
 
     return dumps(posts)
 

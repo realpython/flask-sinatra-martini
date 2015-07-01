@@ -456,7 +456,7 @@ db.C("posts").Insert(post) // post is an instance of the Post{} struct
 ### Python (Flask)
 
 ```python
-posts = [db.blog.find()]
+posts = db.blog.find()
 ```
 
 ### Ruby (Sinatra)
