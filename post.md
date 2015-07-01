@@ -75,7 +75,7 @@ The service created provides a very basic blog application. The following routes
 * `GET /json`: Return the blog content in JSON format.
 * `POST /new`: Add a new post (title, summary, content) to the blog.
 
-The external interface to the blog service is exactly the same for each language.
+The external interface to the blog service is exactly the same for each language. For simplicity MongoDB will be used as the data store for this example as it is the simplest to set up and we dont need to worry about schemas at all. In a normal "blog-like" application a relational database would likely be neccesary.
 
 ### Add A Post
 
@@ -456,8 +456,7 @@ db.C("posts").Insert(post) // post is an instance of the Post{} struct
 ### Python (Flask)
 
 ```python
-_posts = db.blog.find()
-posts = [post for post in _posts]
+posts = [db.blog.find()]
 ```
 
 ### Ruby (Sinatra)
