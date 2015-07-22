@@ -17,4 +17,4 @@ If seed.sh fails and you are not using boot2docker you will need to edit the see
 
 ## Blog Post
 
-[Coming Soon!]()
+[Python, Ruby, and Golang: A Web Service Application Comparison](https://realpython.com/blog/python/python-ruby-and-golang-a-web-Service-application-comparison/)
